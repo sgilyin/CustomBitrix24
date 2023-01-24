@@ -71,7 +71,7 @@ public class CustomBitrix24
 			"FROM contract t_c\n" +
 			"LEFT JOIN contract_parameter_type_1 t_cpt1 ON t_cpt1.cid=t_c.id AND t_cpt1.pid=%d\n" +
 			"LEFT JOIN contract_parameter_type_6 t_cpt6 ON t_cpt6.cid=t_c.id AND t_cpt6.pid=%d\n" +
-			"WHERE t_cpt1.val IS NULL AND NOT t_cpt6.val IS NULL AND t_cpt6.val >= CURRENT_DATE()%s";
+			"WHERE t_c.fc = 0 AND t_cpt1.val IS NULL AND NOT t_cpt6.val IS NULL AND t_cpt6.val >= CURRENT_DATE()%s";
 
 		switch (step) {
 			case 0:
