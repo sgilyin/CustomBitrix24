@@ -28,14 +28,14 @@ public class CustomBitrix24
 		for (int i = 0; i < 5; i++) {
 			String sqlQuery = getSqlQuery(i);
 			String type = getType(i);
-			PreparedStatement ps = con.prepareStatement(sqlQuery);
-			ResultSet rs = ps.executeQuery();
-			while ( rs.next() )
-			{
-				int cid = rs.getInt("cid") ;
-				logger.info(type + ": " + cid);
-				print(type + ": " + cid);
-				taskAdd(type, cid, setup, con);
+			try (PreparedStatement ps = con.prepareStatement(sqlQuery);
+			ResultSet rs = ps.executeQuery()) {
+				while (rs.next()) {
+					int cid = rs.getInt("cid");
+					logger.info(type + ": " + cid);
+					print(type + ": " + cid);
+					taskAdd(type, cid, setup, con);
+				}
 			}
 		}
 		logger.info( "end" );
